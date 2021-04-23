@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/assets/stylesheets/index.css"/>
   <link href="https://fonts.googleapis.com/css?family=Frijole|Open+Sans|Oswald&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
   <title>Mars Dashboard</title>
 </head>
 
@@ -22,15 +23,18 @@
     </section>
     <section class="rovers">
       <section class="rover__item">
-        <input type="button" value="curiosity" value="curiosity" />
+        <input type="button" value="curiosity" id="curiosity" class="rover-button" />
       </section>
       <section class="rover__item">
-        <input type="button" value="spirit" value="spirit" />
+        <input type="button" value="spirit" id="spirit" iclass="rover-button" />
       </section>
       <section class="rover__item">
-        <input type="button" value="oportunity" value="oportunity" />
+        <input type="button" value="oportunity" id="oportunity" class="rover-button"  />
       </section>
     </section>
+  </section>
+  <section id="rover-images">
+
   </section>
 </body>
 <script src="/client.js"></script>
