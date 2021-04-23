@@ -1,12 +1,15 @@
 const showImages = (data) => {
 
-  const imageContainer = document.getElementById('rover-images');
-  for (let photo of data) {
+  const roverImages = document.getElementById('rover-images');
 
-    let img = document.createElement("img");
+  for (const photo of data) {
+    
+    const container = document.createElement("rover-image__container");
+    roverImages.appendChild(container);
+    const img = document.createElement("img");
     img.setAttribute("src", photo.img_src)
 
-    imageContainer.appendChild(img);
+    container.appendChild(img);
   }
 }
 
@@ -31,7 +34,8 @@ curiosity.addEventListener('click', function () {
 
 
 async function getData(name) {
-
+  const roverImages = document.getElementById('rover-images');
+  roverImages.innerHTML = '<p> loading... </p>';
   try {
   const response = await fetch(`http://localhost:3000/nasaAPI`, {
       headers: {
@@ -40,11 +44,13 @@ async function getData(name) {
   });
   const data = await response.json();
   const roverData = JSON.parse(JSON.stringify(data));
-  console.log(roverData.image.photos);
+
   return roverData.image.photos;
 
   } catch(error) {
     console.log(error);
+  } finally {
+    roverImages.innerHTML = '';
   }
 
 }

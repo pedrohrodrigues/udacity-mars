@@ -26,3 +26,18 @@ h1 {
 .rover__item {
   margin-right:20px;
 }
+
+.rover-images {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  margin-top:20px;
+}
+
+rover-image__container {
+  width:32%;
+}
+
+rover-image__container img {
+  max-width: 95%;
+}
