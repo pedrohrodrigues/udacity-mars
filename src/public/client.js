@@ -7,7 +7,7 @@ const showImages = (data) => {
     const container = document.createElement("rover-image__container");
     roverImages.appendChild(container);
     const img = document.createElement("img");
-    img.setAttribute("src", photo.img_src)
+    img.setAttribute("src", photo.img)
 
     container.appendChild(img);
   }
@@ -44,8 +44,16 @@ async function getData(name) {
   });
   const data = await response.json();
   const roverData = JSON.parse(JSON.stringify(data));
-
-  return roverData.image.photos;
+  const rovers = roverData.image.photos.map(p => {
+    return roverInfo = {
+      name: p.rover.name,
+      img: p.img_src,
+      launchDate: p.launch_date,
+      landingDate: p.landing_date,
+      status: p.status,
+    }
+  });
+  return rovers;
 
   } catch(error) {
     console.log(error);
