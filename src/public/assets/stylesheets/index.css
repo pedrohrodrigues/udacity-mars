@@ -41,3 +41,19 @@ rover-image__container {
 rover-image__container img {
   max-width: 95%;
 }
+
+
+
+.rover-info {
+  display:none;
+  margin-top:10px;
+}
+
+.rover-info ul {
+  padding: 0;
+  margin: 0; 
+}
+
+.rover-info ul li {
+  list-style: none;
+}

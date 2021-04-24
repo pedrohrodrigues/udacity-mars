@@ -16,20 +16,20 @@ const showImages = (data) => {
 
 const spirit = document.getElementById("spirit");
   spirit.addEventListener('click', function () {
-    getImages('spirit', showImages)
+    getImages('spirit', showRoverData)
   });
 
 const curiosity = document.getElementById("curiosity");
 
 curiosity.addEventListener('click', function () {
-  getImages('curiosity', showImages)
+  getImages('curiosity', showRoverData)
 });
 
 
-const oportunity = document.getElementById("oportunity");
+const opportunity = document.getElementById("opportunity");
 
-curiosity.addEventListener('click', function () {
-  getImages('curiosity', showImages)
+opportunity.addEventListener('click', function () {
+  getImages('opportunity', showRoverData)
 });
 
 
@@ -48,22 +48,40 @@ async function getData(name) {
     return roverInfo = {
       name: p.rover.name,
       img: p.img_src,
-      launchDate: p.launch_date,
-      landingDate: p.landing_date,
-      status: p.status,
+      launchDate: p.rover.launch_date,
+      landingDate: p.rover.landing_date,
+      status: p.rover.status,
     }
   });
   return rovers;
 
   } catch(error) {
-    console.log(error);
+    roverImages.innerHTML = 'An error has occured, please try again';
   } finally {
     roverImages.innerHTML = '';
   }
 
 }
 
-async function getImages(name, showImages) {
-  const data = await getData(name);
+function showRoverData(data, showImages) {
+  const roverInfo = Immutable.Map({
+    launchDate:  data[0].launchDate,
+    landingDate:  data[0].landingDate,
+    status:  data[0].status,
+  })
+  const roverInfoElement = document.getElementById('rover-info');
+  const launchDateElement = document.getElementById('launch-date');
+  const landingDateElement = document.getElementById('landing-date');
+  const statusElement = document.getElementById('status');
+
+  roverInfoElement.style.display = 'flex';
+  launchDateElement.innerText = roverInfo.get('launchDate');
+  landingDateElement.innerText = roverInfo.get('landingDate');
+  statusElement.innerText = roverInfo.get('status');
+  
   showImages(data);
+}
+async function getImages(name, showRoverData) {
+  const data = await getData(name);
+  showRoverData(data, showImages);
 }
