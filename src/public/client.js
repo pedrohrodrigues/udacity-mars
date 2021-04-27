@@ -5,16 +5,19 @@ async function getRovers() {
 const showImages = (data) => {
 
   const roverImages = document.getElementById('rover-images');
+  if(data.length === 0) {
+    roverImages.innerHTML="No images available"
+  } else {
+    data.forEach(photo =>{
+      const container = document.createElement("div");
+      container.classList.add('rover-image__container');
+      roverImages.appendChild(container);
+      const img = document.createElement("img");
+      img.setAttribute("src", photo.img)
 
-  data.forEach(photo =>{
-    const container = document.createElement("div");
-    container.classList.add('rover-image__container');
-    roverImages.appendChild(container);
-    const img = document.createElement("img");
-    img.setAttribute("src", photo.img)
-
-    container.appendChild(img);
-  });
+      container.appendChild(img);
+    });
+  }
 }
 
 
@@ -52,6 +55,7 @@ async function getData(name) {
     return roverInfo = {
       name: p.rover.name,
       img: p.img_src,
+      earthDate: p.earth_date,
       launchDate: p.rover.launch_date,
       landingDate: p.rover.landing_date,
       status: p.rover.status,
@@ -71,16 +75,19 @@ function showRoverData(data, showImages) {
   const roverInfo = Immutable.Map({
     launchDate:  data[0].launchDate,
     landingDate:  data[0].landingDate,
+    earthDate: data[0].earthDate,
     status:  data[0].status,
   })
   const roverInfoElement = document.getElementById('rover-info');
   const launchDateElement = document.getElementById('launch-date');
   const landingDateElement = document.getElementById('landing-date');
+  const photosDateElement = document.getElementById('photos-date');
   const statusElement = document.getElementById('status');
 
   roverInfoElement.style.display = 'flex';
   launchDateElement.innerText = roverInfo.get('launchDate');
   landingDateElement.innerText = roverInfo.get('landingDate');
+  photosDateElement.innerText = roverInfo.get('earthDate');
   statusElement.innerText = roverInfo.get('status');
   
   showImages(data);
